@@ -7,6 +7,7 @@ User.init({
     username: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
             len: 4
         }
@@ -20,7 +21,13 @@ User.init({
                 msg: 'Password Must Contain 4 Characters.'
             }
         }
-    }
+    },
+    id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      }
 }, {
     sequelize: require('../config/connection'),
     modelName: 'user',
@@ -28,8 +35,12 @@ User.init({
         async beforeCreate(user) {
             const encrypted_password = await bcrypt.hash(user.password, 10);
             user.password = encrypted_password;
+        },
+        async beforeUpdate(user) {
+            const updated_password = await bcrypt.hash(user.password, 10);
+            user.password = updated_password
+          },
         }
-    }
 });
 
 User.prototype.validatePassword = async function (password, encrypted_password) {
@@ -37,3 +48,5 @@ User.prototype.validatePassword = async function (password, encrypted_password) 
 };
 
 module.exports = User;
+
+
