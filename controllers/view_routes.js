@@ -1,7 +1,8 @@
 const view_router = require('express').Router();
 const { isLoggedIn } = require('./helpers');
 const User = require('../models/User');
-// const Saved = require('../models/Saved');
+const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 
 view_router.get('/', isLoggedIn, (req, res) => {
     const user_id = req.session.user_id;
@@ -22,6 +23,40 @@ view_router.get('/', isLoggedIn, (req, res) => {
     res.render('index');
 });
 
+
+view_router.get('/home', isLoggedIn, (req, res) => {
+    Post.findAll({
+      attributes: ['id','title','date_created','content', 'userId'],
+      // include: [
+      //   {
+      //     model: Comment,
+      //     attributes: ['id', 'content', 'post_id', 'user_id', 'date_created'],
+      //     include: {
+      //       model: User,
+      //       attributes: ['username']
+      //     }
+      //   },
+      //   {
+      //     model: User,
+      //     attributes: ['username']
+      //   }
+      // ]
+    })
+      .then(Data => {
+        const posts = Data.map(post => post.get({ plain: true }));
+        res.render('homepage', {
+            posts,
+            
+            // loggedIn: req.session.loggedIn
+          });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
+
+
 view_router.get('/login', isLoggedIn, (req, res) => {
     res.render('login', {errors: req.session.errors});
 });
@@ -29,7 +64,8 @@ view_router.get('/login', isLoggedIn, (req, res) => {
 view_router.get('/register', isLoggedIn, (req, res) => {
     res.render('register', { errors: req.session.errors});
 });
-//---------------------ADDED saved view router----------------------------
+
+//---------------------ADDED saved view router------------------
 
 // view_router.get('/saved', isLoggedIn, (req, res) => {
 //     const user_id = req.session.user_id;

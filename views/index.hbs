@@ -1,0 +1,14 @@
+{{#if user}}
+<a id="post_trigger" class="waves-effect waves-light btn modal-trigger" href="#modal1">CREATE NEW POST</a>
+<div id="modal1" class="modal">
+    <div class="modal-content"></div>
+        <h4>NEW POST</h4>
+        <form action="/posts/create-post" method="post">
+            <input id="enter_title" type="text" name="title" placeholder="TITLE OF YOUR BLOG POST">
+            <input id="enter_content" type="text" name="content" placeholder="BODY OF YOUR BLOG POST"></input>
+            <button id="post_btn" href="/dashboard" class="waves-effect waves-light btn-large right">POST</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{/if}}

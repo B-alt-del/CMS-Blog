@@ -3,7 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 class Comment extends Model {}
 
 Comment.init({
-    conetent: {
+    content: {
         type: DataTypes.STRING,
     },
     date_created: {
@@ -17,20 +17,20 @@ Comment.init({
         primaryKey: true,
         autoIncrement: true,
     },
-    user_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'user',
-            key: 'id',
-        },
-    },
-    blog_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'post',
-            key: 'id',
-        },
-    },
+    // user_id: {
+    //     type: DataTypes.INTEGER,
+    //     references: {
+    //         model: 'user',
+    //         key: 'id',
+    //     },
+    // },
+    // post_id: {
+    //     type: DataTypes.INTEGER,
+    //     references: {
+    //         model: 'post',
+    //         key: 'id',
+    //     },
+    // },
 },  {
     sequelize: require('../config/connection'),
     modelName: 'comment',

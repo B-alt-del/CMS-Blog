@@ -1,25 +1,27 @@
 const post_router = require('express').Router();
 const { isLoggedIn } = require('./helpers');
 const User = require('../models/User');
-// const Saved = require('../models/Saved')
+const Post = require('../models/Post')
 
-// post_router.post('/save', (req, res) => {
+post_router.post('/create-post', (req, res) => {
 
-//         User.findByPk(req.session.user_id).then(user => {
-//             user.createSaved(
-//                 {
-//                     bodyPart: req.body.bodyPart,
-//                     equipment: req.body.equipment,
-//                     gifUrl: req.body.gifUrl,
-//                     id: req.body.id,
-//                     name: req.body.name,
-//                     target: req.body.target
-//                 }
-//             ).then(new_saved => {
-//                 res.json(new_saved)
-//                 // console.log(res)
-//             })
-//         })
-//     })
+        User.findByPk(req.session.user_id).then(user => {
+            // console.log(req.body)
+            // console.log(req.body.title)
+            // console.log(req.body.content)
+            // console.log(req.session.user_id)
+            user.createPost(
+                {
+                    title: req.body.title,
+                    content: req.body.content,
+                    user_id: req.session.user_id,
+                }
+            ).then(new_saved => {
+                // res.json(new_saved)
+                // console.log(res)
+                res.redirect('../')
+            })
+        })
+    })
 
 module.exports = post_router

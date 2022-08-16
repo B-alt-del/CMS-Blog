@@ -19,10 +19,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(session({
     secret: process.env.SESSION_SECRET,
     store: new SequelizeStore({ db }),
-    saveUninitialized: false,
-    resave: false,
+    saveUninitialized: true, //changed from false
+    resave: true,            //changed from false
+    rolling: true,           // added
     cookie: {
         // httpOnly: true
+        expires: 600000
     }
 }));
 
@@ -33,3 +35,4 @@ app.use('/posts', post_routes);
 db.sync().then(() => {
     app.listen(PORT, () => console.log(`LISTENING ON PORT ${PORT}`));
 });
+
