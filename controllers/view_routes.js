@@ -4,50 +4,56 @@ const User = require('../models/User');
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
 
+// view_router.get('/', isLoggedIn, (req, res) => {
+//     const user_id = req.session.user_id;
+//     if (user_id) {
+//         return User.findOne({
+//             where: {
+//                 id: user_id
+//             },
+//             attributes: ['id', 'username']
+//         })
+//         .then(user => {
+//             user = {
+//                 username: user.username
+//             };
+//             res.render('index', {user});
+//         });
+//     }
+//     res.render('index');
+// });
+
+
 view_router.get('/', isLoggedIn, (req, res) => {
-    const user_id = req.session.user_id;
-    if (user_id) {
-        return User.findOne({
-            where: {
-                id: user_id
-            },
-            attributes: ['id', 'username']
-        })
-        .then(user => {
-            user = {
-                username: user.username
-            };
-            res.render('index', { user});
-        });
-    }
-    res.render('index');
-});
-
-
-view_router.get('/home', isLoggedIn, (req, res) => {
     Post.findAll({
       attributes: ['id','title','date_created','content', 'userId'],
-      // include: [
-      //   {
-      //     model: Comment,
-      //     attributes: ['id', 'content', 'post_id', 'user_id', 'date_created'],
-      //     include: {
-      //       model: User,
-      //       attributes: ['username']
-      //     }
-      //   },
-      //   {
-      //     model: User,
-      //     attributes: ['username']
-      //   }
-      // ]
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'content', 
+          // 'post_id', 'user_id', 
+          'date_created'],
+          // include: {
+          //   model: User,
+          //   attributes: ['username']
+          // }
+        },
+        {
+          model: User,
+          attributes: ['username']
+        }
+      ]
     })
       .then(Data => {
         const posts = Data.map(post => post.get({ plain: true }));
+
+        
+        // console.log(req.session.user_id)
+        // console.log(Data)
         res.render('homepage', {
             posts,
-            
-            // loggedIn: req.session.loggedIn
+            User
+            // isLoggedIn: req.session.loggedIn
           });
       })
       .catch(err => {
