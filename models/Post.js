@@ -38,9 +38,9 @@ Post.init({
     modelName: 'post',
 });
 
-Post.hasMany(Comment)
+// Post.hasMany(Comment)
   
-Comment.belongsTo(Post)
+// Comment.belongsTo(Post)
 
 
 module.exports = Post;

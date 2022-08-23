@@ -19,6 +19,34 @@ const Comment = require('./Comment');
 //     foreignKey: 'user_id',
 // })
 //-----------------------
+
+
+User.hasMany(Post);
+
+Post.belongsTo(User);
+
+Comment.belongsTo(User, {
+    onDelete: 'cascade',
+    hooks:true
+});
+
+Comment.belongsTo(Post, {
+    onDelete: 'cascade',
+    hooks: true
+});
+
+User.hasMany(Comment, {
+    onDelete: 'cascade',
+    hooks:true
+});
+
+Post.hasMany(Comment, {
+    onDelete: 'cascade',
+    hooks:true
+})
+
+module.exports = { User, Post, Comment };
+
 // User.hasMany(Post, {
 //     foreignKey: 'userId'
 // });
@@ -55,5 +83,3 @@ const Comment = require('./Comment');
 //     hooks:true
 // })
 
-
-module.exports = { User, Post, Comment };

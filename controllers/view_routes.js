@@ -1,9 +1,9 @@
 const view_router = require('express').Router();
 const { isLoggedIn } = require('./helpers');
-const User = require('../models/User');
-const Post = require('../models/Post');
-const Comment = require('../models/Comment');
-// const {User, Post, Comment} = require('../models/index')
+// const User = require('../models/User');
+// const Post = require('../models/Post');
+// const Comment = require('../models/Comment');
+const {User, Post, Comment} = require('../models/index')
 
 
 view_router.get('/', isLoggedIn, (req, res) => {

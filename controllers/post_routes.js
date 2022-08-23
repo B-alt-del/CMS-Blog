@@ -1,9 +1,9 @@
 const post_router = require('express').Router();
 const { isLoggedIn } = require('./helpers');
-const User = require('../models/User');
-const Post = require('../models/Post');
-const Comment = require('../models/Comment');
-// const {User, Post, Comment} = require('../models/index')
+// const User = require('../models/User');
+// const Post = require('../models/Post');
+// const Comment = require('../models/Comment');
+const {User, Post, Comment} = require('../models/index')
 
 
 post_router.post('/create-post', (req, res) => {

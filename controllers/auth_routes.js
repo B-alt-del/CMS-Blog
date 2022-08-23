@@ -1,7 +1,7 @@
 const auth_router = require('express').Router();
-const User = require('../models/User');
+// const User = require('../models/User');
 const { isLoggedIn } = require('./helpers');
-// const {User, Post, Comment} = require('../models/index')
+const {User, Post, Comment} = require('../models/index')
 
 
 // REGISTER
