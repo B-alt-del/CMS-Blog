@@ -3,28 +3,11 @@ const { isLoggedIn } = require('./helpers');
 const User = require('../models/User');
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
-
-// view_router.get('/', isLoggedIn, (req, res) => {
-//     const user_id = req.session.user_id;
-//     if (user_id) {
-//         return User.findOne({
-//             where: {
-//                 id: user_id
-//             },
-//             attributes: ['id', 'username']
-//         })
-//         .then(user => {
-//             user = {
-//                 username: user.username
-//             };
-//             res.render('index', {user});
-//         });
-//     }
-//     res.render('index');
-// });
+// const {User, Post, Comment} = require('../models/index')
 
 
 view_router.get('/', isLoggedIn, (req, res) => {
+  // console.log(req.session.user_id)
     Post.findAll({
       attributes: ['id','title','date_created','content', 'userId'],
       include: [
@@ -48,12 +31,12 @@ view_router.get('/', isLoggedIn, (req, res) => {
         const posts = Data.map(post => post.get({ plain: true }));
 
         
-        // console.log(req.session.user_id)
+        // console.log(req.session)
         // console.log(Data)
         res.render('homepage', {
             posts,
-            User
-            // isLoggedIn: req.session.loggedIn
+            User,
+            isLoggedIn: req.session.user_id
           });
       })
       .catch(err => {
@@ -61,6 +44,48 @@ view_router.get('/', isLoggedIn, (req, res) => {
         res.status(500).json(err);
       });
   });
+
+view_router.get('/dashboard', isLoggedIn, (req, res) => {
+    if (!req.session.user_id) return res.redirect('/login');
+
+
+    Post.findAll({
+      where: {
+        // use the ID from the session
+        userId: req.session.user_id
+      },
+      attributes: ['id','title','date_created','content', 'userId'],
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'content', 
+          // 'post_id', 'user_id', 
+          'date_created'],
+          // include: {
+          //   model: User,
+          //   attributes: ['username']
+          // }
+        },
+        {
+          model: User,
+          attributes: ['username']
+        }
+      ]
+    })
+      .then(Data => {
+        const posts = Data.map(post => post.get({ plain: true }));
+
+        res.render('dashboard', {
+            posts,
+            User,
+            isLoggedIn: req.session.user_id
+          });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+})
 
 
 view_router.get('/login', isLoggedIn, (req, res) => {
