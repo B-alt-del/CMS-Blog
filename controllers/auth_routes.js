@@ -49,7 +49,6 @@ auth_router.post('/login', isLoggedIn, (req, res) => {
       req.session.errors = ['THAT USERNAME IS NOT IN OUR DATABSE'];
       return res.redirect('/login');
     }
-
         const pass_validated = await user.validatePassword(password, user.password);
         if (!pass_validated) {
             req.session.errors = ['PASSWORD INCORRECT'];
