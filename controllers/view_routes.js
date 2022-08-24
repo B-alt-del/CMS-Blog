@@ -30,9 +30,6 @@ view_router.get('/', isLoggedIn, (req, res) => {
       .then(Data => {
         const posts = Data.map(post => post.get({ plain: true }));
 
-        
-        // console.log(req.session)
-        // console.log(Data)
         res.render('homepage', {
             posts,
             User,
