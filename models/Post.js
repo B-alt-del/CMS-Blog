@@ -1,7 +1,4 @@
 const { DataTypes, Model } = require('sequelize');
-const User = require('../models/User');
-const Comment = require('../models/Comment');
-
 
 class Post extends Model {};
 
@@ -25,22 +22,9 @@ Post.init({
         primaryKey: true,
         autoIncrement: true,
     },
-    // user_id: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //       model: 'user',
-    //       key: 'id',
-    //     }
-    // }
-
 }, {
     sequelize: require('../config/connection'),
     modelName: 'post',
 });
-
-// Post.hasMany(Comment)
-  
-// Comment.belongsTo(Post)
-
 
 module.exports = Post;

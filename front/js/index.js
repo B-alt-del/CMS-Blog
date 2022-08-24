@@ -1,22 +1,21 @@
 // MATERIALIZE INIT
-document.addEventListener('DOMContentLoaded', function () { M.AutoInit() })
 document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.modal');
-});
+    const optionsModal = {
+        onOpenStart: (event) => { 
+            console.log('onOpenStart')
+            console.log(event)
+        }
+    }
 
+
+
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, optionsModal);
+  });
 
 function activeTab(id){
-    // ElHomeTab = document.querySelector('#HomeTab');
-    // ElDashboardTab = document.querySelector('#DashboardTab');
-    // ElLoginTab = document.querySelector('#LoginTab');
-    // ElRegisterTab = document.querySelector('#RegisterTab');
-
     ElTab = document.querySelector(`#${id}`);
-
     ElTab.classList.add('active')
-
-    console.log(id);
-
 }
 
 
@@ -26,4 +25,9 @@ function deletePost(id){
       })
 
     window.location.href = "/dashboard";
+}
+
+function toLoginPage(){
+    console.log('function runs')
+    window.location.href = "/login"
 }

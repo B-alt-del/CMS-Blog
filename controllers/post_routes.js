@@ -1,15 +1,10 @@
 const post_router = require('express').Router();
 const { isLoggedIn } = require('./helpers');
-// const User = require('../models/User');
-// const Post = require('../models/Post');
-// const Comment = require('../models/Comment');
 const {User, Post, Comment} = require('../models/index');
-const { post } = require('./auth_routes');
 
-//----------------------create comment-----------------------
-post_router.post('/create-comment/:postId', (req, res) => {
+//--------------------create comment-----------------------
+post_router.post('/create-comment/:postId', isLoggedIn, (req, res) => {
     Post.findByPk(req.params.postId).then(post => {
-        console.log(post)
         post.createComment(
             {
                 content: req.body.content,
@@ -20,16 +15,9 @@ post_router.post('/create-comment/:postId', (req, res) => {
         })
     })
 })
-
-//-----------------------------------------------------------
-
-post_router.post('/create-post', (req, res) => {
-// console.log(req)
+//---------------------create post--------------------------
+post_router.post('/create-post', isLoggedIn, (req, res) => {
         User.findByPk(req.session.user_id).then(user => {
-            // console.log(req.body)
-            // console.log(req.body.title)
-            // console.log(req.body.content)
-            // console.log(req.session.user_id)
             user.createPost(
                 {
                     title: req.body.title,
@@ -39,30 +27,24 @@ post_router.post('/create-post', (req, res) => {
             ).then(new_saved => {
                 // res.json(new_saved)
                 res.redirect('/dashboard')
-                console.log(new_saved)
-
+                // console.log(new_saved)
             })
         })
     })
 //-----------------------delete post--------------------------
-
-post_router.delete('/delete-post/:postId', (req, res) => {
+post_router.delete('/delete-post/:postId', isLoggedIn, (req, res) => {
     Post.destroy({
         where: {
           id: req.params.postId,
         },
       })
-        .then((deletedBook) => {
-        //   res.json(deletedBook);
+        .then(() => {
             res.redirect('/dashboard')
         })
         .catch((err) => res.json(err));
 })
-
-
 //-----------------------update post--------------------------
-post_router.post('/update-post/:postId', (req, res) => {
-
+post_router.post('/update-post/:postId', isLoggedIn, (req, res) => {
     Post.update(
         {
             title: req.body.title,
@@ -71,54 +53,12 @@ post_router.post('/update-post/:postId', (req, res) => {
         {
             where: {id: req.params.postId}
         }
-    ).then((updatedPost) => {
+    ).then(() => {
         res.redirect('/dashboard')
-        // res.json(updatedPost)
     }).catch((err) => {
         console.log(err);
         res.json(err);
     })
 })
-//------------------------------------------------------------
-
-post_router.get('/', isLoggedIn, (req, res) => {
-    Post.findAll({
-        attributes: ['id','title','date_created','content', 'userId'],
-        include: [
-        {
-            model: Comment,
-            attributes: ['id', 'content', 
-            // 'post_id', 'user_id', 
-            'date_created'],
-            // include: {
-            //   model: User,
-            //   attributes: ['username']
-            // }
-        },
-        {
-            model: User,
-            attributes: ['username']
-        }
-        ]
-    })
-        .then(Data => {
-        const posts = Data.map(post => post.get({ plain: true }));
-
-        
-        // console.log(req.session.user_id)
-        console.log(Data)
-        console.log('got to this point')
-        res.render('homepage', {
-            posts,
-            User
-            // isLoggedIn: req.session.loggedIn
-            });
-        })
-        .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-        });
-    });
-
 
 module.exports = post_router

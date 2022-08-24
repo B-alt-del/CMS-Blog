@@ -1,59 +1,102 @@
-{{#each posts as |post|}}
+{{#if isLoggedIn}}
 
+                {{#each posts as |post|}}
 
-<div>
-    <div class="card">
-        <div class="card-content hoverable modal-trigger" href="#Hmodal{{post.id}}">
-            <h5>Title: {{post.title}} </h5>
-            <div class="right">
-                {{!-- <p>created by: {{post.user.username}}</p> --}}
-                <p>{{post.date_created}}</p>
-            </div>
-        </div>
-
-        {{!-- <a id="{{post.id}}" class="waves-effect waves-light btn modal-trigger" href="#modal{{post.id}}">EDIT POST</a> --}}
-
-        <div id="Hmodal{{post.id}}" class="modal">
-            <div class="modal-content">
-                <h5>Title: {{post.title}} </h5>
-                <p>Content: {{post.content}} </p>
-                <p>{{post.user.username}}</p>
-                <p>{{post.date_created}}</p>
-                <p>Comments:</p>
-                {{#each post.comments as |comment|}}
+                <div>
                     <div class="card">
-                        <div class="card-content hoverable" >
-                            <p>{{comment.content}} </p>
-                            <p>{{comment.date_created}}</p>
-                            <p>{{comment.user.username}}</p>                          
+                        <div class="card-content hoverable modal-trigger" href="#Hmodal{{post.id}}">
+                            <h5>Title: {{post.title}} </h5>
+                            <div class="right">
+                                {{!-- <p>created by: {{post.user.username}}</p> --}}
+                                <p>{{post.date_created}}</p>
+                            </div>
+                        </div>
+
+                        {{!-- <a id="{{post.id}}" class="waves-effect waves-light btn modal-trigger" href="#modal{{post.id}}">EDIT POST</a> --}}
+
+                        <div id="Hmodal{{post.id}}" data-id="{{post.id}}" class="modal">
+                            <div class="modal-content">
+                                <h5>Title: {{post.title}} </h5>
+                                <p>Content: {{post.content}} </p>
+                                <p>{{post.user.username}}</p>
+                                <p>{{post.date_created}}</p>
+                                <p>Comments:</p>
+                                {{#each post.comments as |comment|}}
+                                    <div class="card">
+                                        <div class="card-content hoverable" >
+                                            <p>{{comment.content}} </p>
+                                            <p>{{comment.date_created}}</p>
+                                            <p>{{comment.user.username}}</p>                          
+                                        </div>
+                                    </div>
+                                {{else}}
+                                <h6 class="pb-4 has-text-centered is-italic">CURRENTLY NO COMMENTS</h6>
+                                {{/each}}
+
+                                    <form action="/posts/create-comment/{{post.id}}" method="post">
+                                        <input id="input_content" type="text" name="content"  placeholder="current user is {{isLoggedIn}}">
+                                        {{!-- <button id="post_btn" href="/" class="waves-effect waves-light btn-large left">Post</button> --}}
+                                        <button id="comment_btn{{post.id}}" href="#" class="waves-effect waves-light btn-large left">Leave Comment</button>
+                                    </form>
+
+                                <button class="waves-effect waves-light btn-large right modal-close" >close</button>
+                            </div>
                         </div>
                     </div>
+                </div>
+
                 {{else}}
-                <h6 class="pb-4 has-text-centered is-italic">CURRENTLY NO COMMENTS</h6>
+                <h6 class="pb-4 has-text-centered is-italic">YOU CURRENTLY HAVE NO POSTS</h6>
                 {{/each}}
 
-                    <form action="/posts/create-comment/{{post.id}}" method="post">
-                        <input id="input_content" type="text" name="content" value="value" placeholder="Body">
-                        {{!-- <button id="post_btn" href="/" class="waves-effect waves-light btn-large left">Post</button> --}}
-                        <button id="comment_btn{{post.id}}" href="#" class="waves-effect waves-light btn-large left">Leave Comment</button>
-                    </form>
-                <button class="waves-effect waves-light btn-large right modal-close" >close</button>
-            </div>
-            
-
-            {{!-- <div class="card-action2 right-align">
-                <form action="/user/{{id}}?_method=DELETE" method="POST">
-                    <button type="submit" class="btn-floating btn waves-effect waves-light red">
-                        <i class="material-icons">delete</i>
-                    </button>
-                </form>
-            </div> --}}
-        </div>
-    </div>
-</div>
-
-
-
 {{else}}
-<h6 class="pb-4 has-text-centered is-italic">YOU CURRENTLY HAVE NO POSTS</h6>
-{{/each}}
+
+                {{#each posts as |post|}}
+
+                <div>
+                    <div class="card">
+                        <div class="card-content hoverable modal-trigger" href="#Hmodal{{post.id}}">
+                            <h5>Title: {{post.title}} </h5>
+                            <div class="right">
+                                {{!-- <p>created by: {{post.user.username}}</p> --}}
+                                <p>{{post.date_created}}</p>
+                            </div>
+                        </div>
+
+                        {{!-- <a id="{{post.id}}" class="waves-effect waves-light btn modal-trigger" href="#modal{{post.id}}">EDIT POST</a> --}}
+
+                        <div id="Hmodal{{post.id}}" data-id="{{post.id}}" class="modal">
+                            <div class="modal-content">
+                                <h5>Title: {{post.title}} </h5>
+                                <p>Content: {{post.content}} </p>
+                                <p>{{post.user.username}}</p>
+                                <p>{{post.date_created}}</p>
+                                <p>Comments:</p>
+                                {{#each post.comments as |comment|}}
+                                    <div class="card">
+                                        <div class="card-content hoverable" >
+                                            <p>{{comment.content}} </p>
+                                            <p>{{comment.date_created}}</p>
+                                            <p>{{comment.user.username}}</p>                          
+                                        </div>
+                                    </div>
+                                {{else}}
+                                <h6 class="pb-4 has-text-centered is-italic">CURRENTLY NO COMMENTS</h6>
+                                {{/each}}
+
+                                <button class="waves-effect waves-light btn-large left" onclick="toLoginPage" >Login To Comment</button>
+
+                                <button class="waves-effect waves-light btn-large right modal-close" >close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{else}}
+                <h6 class="pb-4 has-text-centered is-italic">YOU CURRENTLY HAVE NO POSTS</h6>
+                {{/each}}
+
+
+
+
+{{/if}}

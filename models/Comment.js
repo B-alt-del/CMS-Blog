@@ -17,20 +17,7 @@ Comment.init({
         primaryKey: true,
         autoIncrement: true,
     },
-    // user_id: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //         model: 'user',
-    //         key: 'id',
-    //     },
-    // },
-    // post_id: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //         model: 'post',
-    //         key: 'id',
-    //     },
-    // },
+    
 },  {
     sequelize: require('../config/connection'),
     modelName: 'comment',

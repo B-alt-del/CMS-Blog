@@ -13,9 +13,7 @@
 </div>
 {{/if}}
 
-
 {{#each posts as |post|}}
-
 
 <div>
     <div class="card">
@@ -24,14 +22,6 @@
             <p>{{post.content}} </p>
             <p>created by:{{post.user.username}} </p>
         </div>
-        {{!-- <div class="card-action2 right-align">
-            <form action="/user/{{id}}?_method=DELETE" method="POST">
-                <button type="submit" class="btn-floating btn waves-effect waves-light red">
-                    <i class="material-icons">delete</i>
-                </button>
-            </form>
-        </div> --}}
-        {{!-- <a id="post_trigger_{{post.id}}" class="waves-effect waves-light btn modal-trigger" href="#modal{{post.id}}">EDIT POST</a> --}}
         <div id="modal{{post.id}}" class="modal">
             <div class="modal-content"></div>
             <h4>Edit Post</h4>
@@ -39,16 +29,11 @@
                 <input id="enter_title" type="text" name="title" value="{{post.title}}" placeholder="Title">
                 <input id="enter_content" type="text" name="content" value="{{post.content}}" placeholder="Body">
                 <button id="post_btn" href="/dashboard" class="waves-effect waves-light btn-large left">Save Changes</button>
-                {{!-- <button  href="/dashboard" class="waves-effect waves-light btn-large right">Save Changes</button> --}}
             </form>
             <button onclick="deletePost({{post.id}})" class="waves-effect waves-light btn-large right">Delete</button>
         </div>
     </div>
 
-
-
     {{else}}
     <h6 class="pb-4 has-text-centered is-italic">You currently have no posts</h6>
     {{/each}}
-
-    {{!-- <a href="/dashboard/edit/{{post.id}}"><button class="button mb-5 ml-5 is-warning">edit post</button></a> --}}

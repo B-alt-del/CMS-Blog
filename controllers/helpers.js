@@ -5,5 +5,6 @@ exports.isLoggedIn = function (req, res, next) {
     if (is_auth_route && user_id) {
         return res.redirect('/');
     }
+    
     next();
 }
