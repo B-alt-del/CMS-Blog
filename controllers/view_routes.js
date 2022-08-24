@@ -16,10 +16,10 @@ view_router.get('/', isLoggedIn, (req, res) => {
           attributes: ['id', 'content', 
           // 'post_id', 'user_id', 
           'date_created'],
-          // include: {
-          //   model: User,
-          //   attributes: ['username']
-          // }
+          include: {
+            model: User,
+            attributes: ['username']
+          }
         },
         {
           model: User,
@@ -29,6 +29,8 @@ view_router.get('/', isLoggedIn, (req, res) => {
     })
       .then(Data => {
         const posts = Data.map(post => post.get({ plain: true }));
+
+        console.log(posts[1].comments)
 
         res.render('homepage', {
             posts,

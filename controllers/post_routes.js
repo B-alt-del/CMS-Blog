@@ -6,6 +6,22 @@ const { isLoggedIn } = require('./helpers');
 const {User, Post, Comment} = require('../models/index');
 const { post } = require('./auth_routes');
 
+//----------------------create comment-----------------------
+post_router.post('/create-comment/:postId', (req, res) => {
+    Post.findByPk(req.params.postId).then(post => {
+        console.log(post)
+        post.createComment(
+            {
+                content: req.body.content,
+                userId: req.session.user_id
+            }
+        ).then(new_comment => {
+            res.redirect('/')
+        })
+    })
+})
+
+//-----------------------------------------------------------
 
 post_router.post('/create-post', (req, res) => {
 // console.log(req)
@@ -22,8 +38,9 @@ post_router.post('/create-post', (req, res) => {
                 }
             ).then(new_saved => {
                 // res.json(new_saved)
-                // console.log(res)
                 res.redirect('/dashboard')
+                console.log(new_saved)
+
             })
         })
     })
