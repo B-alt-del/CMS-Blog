@@ -59,7 +59,7 @@ view_router.get('/dashboard', isLoggedIn, (req, res) => {
         {
           model: Comment,
           attributes: ['id', 'content', 
-          // 'post_id', 'user_id', 
+          'postId', 'userId', 
           'date_created'],
           // include: {
           //   model: User,

@@ -5,8 +5,8 @@
     <div class="card">
         <div class= "card-content">
             <h5>{{post.title}} </h5>
-        <p>{{post.content}} </p>
-        <p>created by:{{post.user.username}} </p>
+        {{!-- <p>{{post.content}} </p> --}}
+        <p>created by: {{post.user.username}} at: {{post.date_created}}</p>
         </div>
         {{!-- <div class="card-action2 right-align">
             <form action="/user/{{id}}?_method=DELETE" method="POST">
