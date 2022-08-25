@@ -1,14 +1,14 @@
-<header style="color:teal; font-weight: bold; font-size:large; display:flex; justify-content: center;">DASHBOARD: View-Post-Update-Delete your posts</header>
+<header style="color:rgb(59, 40, 126); font-weight: bold; font-size:x-large; display:flex; justify-content: center;">DASHBOARD: View-Post-Update-Delete your posts</header>
 
 {{#if isLoggedIn}}
-    <a id="post_trigger" class="waves-effect waves-light btn modal-trigger" href="#modal1">CREATE NEW POST</a>
+    <a id="post_trigger" class="indigo waves-effect waves-light btn modal-trigger" href="#modal1">CREATE NEW POST</a>
     <div id="modal1" class="modal">
         <div class="modal-content"></div>
-            <h4>NEW POST</h4>
+            <h5>Create New Post</h5>
         <form action="/posts/create-post" method="post">
             <input id="enter_title" type="text" name="title" placeholder="TITLE OF YOUR BLOG POST">
             <input id="enter_content" type="text" name="content" placeholder="BODY OF YOUR BLOG POST"></input>
-            <button id="post_btn" href="/dashboard" class="waves-effect waves-light btn-large right">POST</button>
+            <button id="post_btn" href="/dashboard" class="indigo waves-effect waves-light btn-large right">POST</button>
         </form>
     </div>
 {{/if}}
@@ -27,9 +27,9 @@
                     <form action="/posts/update-post/{{post.id}}" method="post">
                         <input id="enter_title" type="text" name="title" value="{{post.title}}" placeholder="Title">
                         <input id="enter_content" type="text" name="content" value="{{post.content}}" placeholder="Body">
-                        <button id="post_btn" href="/dashboard" class="waves-effect waves-light btn-large left">Save Changes</button>
+                        <button id="post_btn" href="/dashboard" class="deep-purple lighten-3 waves-effect waves-light btn-large left modal-close">Save Changes</button>
                     </form>
-                    <button onclick="deletePost({{post.id}})" class="waves-effect waves-light btn-large right">Delete</button>
+                    <button onclick="deletePost({{post.id}})" class="deep-purple lighten-3 waves-effect waves-light btn-large right modal-close">Delete</button>
                 </div>
             </div>
         </div>

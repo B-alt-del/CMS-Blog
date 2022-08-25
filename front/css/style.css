@@ -20,3 +20,37 @@
 .noUnd {
     border-bottom: none !important;
 }
+
+.tab a{
+    font-size: 170%;
+}
+/* 
+.containCard {
+    background:  rgb(218, 228, 255);
+    margin: 1%;
+} */
+
+.card{
+    background:  rgb(234, 240, 255);
+    margin: 1%;
+}
+
+.card h5{
+    color: rgb(98, 0, 202);
+    font-size: xx-large;
+}
+/* 
+.modal-content form {
+    background: red;
+} */
+
+.modal {
+    padding: 0 1% 1% 1%;
+}
+
+.homepage_card {
+    padding: 1% !important;
+    display: flex;
+    height: 80px;
+    justify-content: space-between;
+}

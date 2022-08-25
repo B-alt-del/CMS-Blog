@@ -10,12 +10,12 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-  <header >
-    <nav class="teal lighten-2 row">
+<body class="blue-grey lighten-2">
+  <header>
+    <nav class=" indigo lighten-2 row">
       <ul >
         <li class="tab "><a id="HomeTab" onclick="activeTab(HomeTab)" class="text-darken-2" href="/" target="_self">HOME</a></li>
-        <li class="tab "><a id="DashboardTab" onclick="activeTab(DashboardTab)" class="text-darken-2 no " href="/dashboard" target="_self">Dashboard</a></li>
+        <li class="tab "><a id="DashboardTab" onclick="activeTab(DashboardTab)" class="text-darken-2 no " href="/dashboard" target="_self">DASHBOARD</a></li>
       {{#if isLoggedIn}}
         <li class="tab"><a class="text-darken-2" href="/auth/logout" target="_self">LOG OUT</a></li>
         {{else}}
