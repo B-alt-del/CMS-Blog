@@ -16,26 +16,30 @@ My task to further my education in Coding is to build a CMS-style blog site simi
 
 ## Installation
 
-This App has no installation necessary, simply visit [insert deployed address here] and you are ready to blog.
+This App has no installation necessary, simply visit https://brads-chill-tech-blog.herokuapp.com/ and you are ready to blog.
 
 ## Usage
 
 The Blog is quite straightforward:
 
--When visiting for the first time you will see the homepage loaded with all existing posts.
--Click on a post title to reveal more info (post contents and the author)
-    -upon clicking a post you will be able to view the comments left by other users
-    -if signed in you will have the option to leave a comment yourself, if not you will be redirected to Login Screen
--Clicking on the register tab will allow you to create a user
--Clicking login tab will direct you to login page
--Dashboard tab is where you can manage your own posts
-    -Create New Post
-    -Update Existing Post
-    -Delete Existing Post
--If idle for too long you will be logged out
--Logout tab will also log you out
+- When visiting for the first time you will see the homepage loaded with all existing posts.
+- Click on a post title to reveal more info (post contents and the author)
+    - upon clicking a post you will be able to view the comments left by other users
+    - if signed in you will have the option to leave a comment yourself, if not you will be redirected to Login Screen
+- Clicking on the register tab will allow you to create a user
+- Clicking login tab will direct you to login page
+- Dashboard tab is where you can manage your own posts
+    - Create New Post
+    - Update Existing Post
+    - Delete Existing Post
+- If idle for too long you will be logged out
+- Logout tab will also log you out
 
-![Note Taker In Action](/assets/images/screenshot.png)
+![Login](assets/images/login.PNG)
+
+![Creating a post](assets/images/post.PNG)
+
+![Comments on post](assets/images/comments.PNG)
 
 ## License
 
@@ -45,7 +49,9 @@ The Blog is quite straightforward:
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
-Feel free to make adjustments on the app and submit a pull request on my github (provided below)    
+Feel free to make adjustments on the app and submit a pull request on my github  
+
+- https://github.com/B-alt-del/MVS-Blog
 
 ## Tests
 
