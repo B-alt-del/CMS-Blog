@@ -35,11 +35,11 @@ The Blog is quite straightforward:
 - If idle for too long you will be logged out
 - Logout tab will also log you out
 
-![Login](/assets/images/login.PNG)
+![Login](/Assets/images/login.PNG)
 
-![Creating a post](/assets/images/post.PNG)
+![Creating a post](/Assets/images/post.PNG)
 
-![Comments on post](/assets/images/comments.PNG)
+![Comments on post](/Assets/images/comments.PNG)
 
 ## License
 
