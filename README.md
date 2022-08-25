@@ -35,7 +35,7 @@ The Blog is quite straightforward:
 - If idle for too long you will be logged out
 - Logout tab will also log you out
 
-![Login](/Assets/images/login.PNG)
+![Login](/Assets/images/login.png)
 
 ![Creating a post](/Assets/images/post.PNG)
 
